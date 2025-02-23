@@ -1,0 +1,6 @@
+@datingAPI_HostAddress = http://localhost:5001
+
+GET {{datingAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
