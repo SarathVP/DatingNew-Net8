@@ -49,6 +49,7 @@ namespace datingAPI.Controllers
         {
             if (passwordhash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
         }
+        
 
         return new UserDto{
             Username = user.UserName,
