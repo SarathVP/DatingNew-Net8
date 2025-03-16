@@ -7,8 +7,9 @@ namespace datingAPI.DTO
     public class RegisterDto
     {
         [Required]
-        public required string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
         [Required]
-        public required string passWord { get; set; }
+        [StringLength(10, MinimumLength = 6)]
+        public string passWord { get; set; } = string.Empty;
     }
 }

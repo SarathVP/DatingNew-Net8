@@ -1,5 +1,3 @@
-
-
 using System.Security.Cryptography;
 using System.Text;
 using datingAPI.Data;
@@ -17,18 +15,19 @@ namespace datingAPI.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.Username)) return BadRequest("User Already Exists");
-            using var hmac = new HMACSHA512();
-            var user = new AppUser{
-                UserName = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.passWord)),
-                PasswordSalt = hmac.Key
-            };
-            context.Users.Add(user);
-            await context.SaveChangesAsync();
-            return new UserDto{
-                Username = user.UserName,
-                Token = tokenService.GenerateToken(user)
-            };
+            return Ok();
+            // using var hmac = new HMACSHA512();
+            // var user = new AppUser{
+            //     UserName = registerDto.Username.ToLower(),
+            //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.passWord)),
+            //     PasswordSalt = hmac.Key
+            // };
+            // context.Users.Add(user);
+            // await context.SaveChangesAsync();
+            // return new UserDto{
+            //     Username = user.UserName,
+            //     Token = tokenService.GenerateToken(user)
+            // };
             
         }
 
