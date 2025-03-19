@@ -13,7 +13,7 @@ export class RegisterComponent {
   model: any = {};
   cancelRegister = output<boolean>();
   accountService = inject(AccountService);
-  private toastr = inject(ToastrService)
+  private toastr = inject(ToastrService);
 
   register() {
     this.accountService.register(this.model).subscribe({
