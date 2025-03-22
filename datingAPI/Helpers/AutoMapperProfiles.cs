@@ -13,6 +13,7 @@ namespace datingAPI.Helpers
                 .ForMember(d => d.Age, f => f.MapFrom(s => s.DateOfBirth.CalculateAge()))
                 .ForMember(d => d.PhotoUrl, f => f.MapFrom(s => s.Photos!.FirstOrDefault(i => i.IsMain)!.Url));
             CreateMap<Photo, PhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
         }
     }
 }
