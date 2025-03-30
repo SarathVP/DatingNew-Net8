@@ -1,6 +1,3 @@
-
-using datingAPI.Extensions;
-
 namespace datingAPI.Entities
 {
     public class AppUser

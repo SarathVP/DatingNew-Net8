@@ -2,7 +2,6 @@ using System.Security.Cryptography;
 using System.Text;
 using datingAPI.Data;
 using datingAPI.DTO;
-using datingAPI.Entities;
 using datingAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +36,9 @@ namespace datingAPI.Controllers
 
        [HttpPost("login")]
        public async Task<ActionResult<UserDto>> login(LoginDto loginDto){
-        var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
+        var user = await context.Users
+                .Include(x => x.Photos)
+                .FirstOrDefaultAsync(x => x.UserName == loginDto.UserName.ToLower());
 
         if (user == null) return Unauthorized("User Not Found");
 
@@ -52,7 +53,8 @@ namespace datingAPI.Controllers
 
         return new UserDto{
             Username = user.UserName,
-            Token = tokenService.GenerateToken(user)
+            Token = tokenService.GenerateToken(user),
+            PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
         };
        }
     }
