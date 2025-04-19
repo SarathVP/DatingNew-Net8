@@ -14,6 +14,8 @@ namespace datingAPI.Helpers
                 .ForMember(d => d.PhotoUrl, f => f.MapFrom(s => s.Photos!.FirstOrDefault(i => i.IsMain)!.Url));
             CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>();
+            CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s));
         }
     }
 }
