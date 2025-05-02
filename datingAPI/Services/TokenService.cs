@@ -15,7 +15,8 @@ namespace datingAPI.Services
             if (TokenKey.Length < 64) throw new Exception("Token length is lesser than 64");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TokenKey));
             var claims = new List<Claim>{
-                new(ClaimTypes.NameIdentifier, appUser.UserName)
+                new(ClaimTypes.NameIdentifier, appUser.Id.ToString()),
+                new(ClaimTypes.Name, appUser.UserName)
             };
             var signCreds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var TokenDescriptor = new SecurityTokenDescriptor{

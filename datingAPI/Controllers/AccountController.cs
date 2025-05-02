@@ -30,7 +30,8 @@ namespace datingAPI.Controllers
             return new UserDto{
                 Username = user.UserName,
                 Token = tokenService.GenerateToken(user),
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
             
         }
@@ -60,7 +61,8 @@ namespace datingAPI.Controllers
             Username = user.UserName,
             KnownAs = user.KnownAs,
             Token = tokenService.GenerateToken(user),
-            PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+            PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+            Gender = user.Gender
         };
        }
     }

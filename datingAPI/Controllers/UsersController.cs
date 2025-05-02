@@ -2,6 +2,7 @@ using AutoMapper;
 using datingAPI.DTO;
 using datingAPI.Entities;
 using datingAPI.Extensions;
+using datingAPI.Helpers;
 using datingAPI.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -15,8 +16,13 @@ namespace datingAPI.Controllers
                     IPhotoService photoService) : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetAllUsers(){
-            return Ok(await userRepository.GetAllMembersAsync());
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetAllUsers([FromQuery] UserParams userParams){
+            userParams.CurrentUserName = User.GetUsername();
+
+            var users = await userRepository.GetAllMembersAsync(userParams);
+            Response.AddPaginationHeader(users);
+            return Ok(users);
+
         }
         
         [HttpGet("{username}")]
