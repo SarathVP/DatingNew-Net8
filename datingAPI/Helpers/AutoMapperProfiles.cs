@@ -16,6 +16,11 @@ namespace datingAPI.Helpers
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
             CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s));
+            CreateMap<Message, MessageDto>()
+                .ForMember(x => x.SenderPhotoUrl,
+                        i => i.MapFrom(k => k.Sender.Photos!.FirstOrDefault(k => k.IsMain)!.Url))
+                .ForMember(x => x.RecipientPhotoUrl,
+                        i => i.MapFrom(k => k.Recipient.Photos!.FirstOrDefault(k => k.IsMain)!.Url));
         }
     }
 }

@@ -7,7 +7,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const busyDervice = inject(BusyService);
   busyDervice.busy();
   return next(req).pipe(
-    delay(1000),
+    delay(500),
     finalize(() => {
       busyDervice.idle();
     })
