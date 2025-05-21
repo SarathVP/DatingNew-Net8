@@ -2,6 +2,7 @@ using datingAPI.Data;
 using datingAPI.Helpers;
 using datingAPI.Interfaces;
 using datingAPI.Services;
+using datingAPI.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace datingAPI.Extensions
@@ -24,6 +25,8 @@ namespace datingAPI.Extensions
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
             return services;
         }
     }

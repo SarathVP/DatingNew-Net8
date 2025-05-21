@@ -21,6 +21,8 @@ namespace datingAPI.Helpers
                         i => i.MapFrom(k => k.Sender.Photos!.FirstOrDefault(k => k.IsMain)!.Url))
                 .ForMember(x => x.RecipientPhotoUrl,
                         i => i.MapFrom(k => k.Recipient.Photos!.FirstOrDefault(k => k.IsMain)!.Url));
+            CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+            CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
         }
     }
 }
