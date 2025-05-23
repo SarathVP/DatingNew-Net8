@@ -64,9 +64,5 @@ namespace datingAPI.Data
             return await context.Likes.FindAsync(SourceUserId, TargetUserId);
         }
 
-        public async Task<bool> SaveChanges()
-        {
-            return await context.SaveChangesAsync() > 0;
-        }
     }
 }
