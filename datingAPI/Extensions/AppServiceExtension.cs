@@ -14,7 +14,7 @@ namespace datingAPI.Extensions
             services.AddCors();
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
             services.AddScoped<ITokenService, TokenService>();
